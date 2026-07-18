@@ -1,53 +1,55 @@
+const ROOT = "/yuta_izu_travel";   // ★ GitHub Pages のルート
 const CACHE_NAME = "izu-adventure-v5";
+
 const URLS_TO_CACHE = [
-  "./index.html",
-  "./splash.html",
-  "./home.html",
-  "./reverse-bingo.html",
-  "./missions.html",
-  "./schedule.html",
-  "./collection.html",
-  "./roulette.html",
-  "./settings.html",
-  "./map.html",
-  "./rules.html",
+  `${ROOT}/index.html`,
+  `${ROOT}/splash.html`,
+  `${ROOT}/home.html`,
+  `${ROOT}/reverse-bingo.html`,
+  `${ROOT}/missions.html`,
+  `${ROOT}/schedule.html`,
+  `${ROOT}/collection.html`,
+  `${ROOT}/roulette.html`,
+  `${ROOT}/settings.html`,
+  `${ROOT}/map.html`,
+  `${ROOT}/rules.html`,
 
-  "./home.css",
-  "./home.js",
-  "./reverse-bingo.css",
-  "./reverse-bingo.js",
-  "./missions.css",
-  "./missions.js",
-  "./schedule.css",
-  "./schedule.js",
-  "./collection.css",
-  "./collection.js",
-  "./roulette.css",
-  "./roulette.js",
-  "./settings.css",
-  "./settings.js",
-  "./splash.css",
-  "./splash.js",
-  "./map.css",
-  "./map.js",
-  "./rules.css",
-  "./rules.js",
+  `${ROOT}/home.css`,
+  `${ROOT}/home.js`,
+  `${ROOT}/reverse-bingo.css`,
+  `${ROOT}/reverse-bingo.js`,
+  `${ROOT}/missions.css`,
+  `${ROOT}/missions.js`,
+  `${ROOT}/schedule.css`,
+  `${ROOT}/schedule.js`,
+  `${ROOT}/collection.css`,
+  `${ROOT}/collection.js`,
+  `${ROOT}/roulette.css`,
+  `${ROOT}/roulette.js`,
+  `${ROOT}/settings.css`,
+  `${ROOT}/settings.js`,
+  `${ROOT}/splash.css`,
+  `${ROOT}/splash.js`,
+  `${ROOT}/map.css`,
+  `${ROOT}/map.js`,
+  `${ROOT}/rules.css`,
+  `${ROOT}/rules.js`,
 
-  "./compass.png",
-  "./compass2.png",
-  "./izu-map.png",
-  "./images/logo-reverse-bingo.png",
-  "./images/map.png",
-  "./images/quest-log.png",
-  "./images/reverse-bingo-logo.png",
-  "./images/rule.png",
-  "./images/schedule-logo.png",
-  "./images/roulette-map-title.png",
-  "./images/roulette.png",
-  "./images/reset.png",
+  `${ROOT}/compass.png`,
+  `${ROOT}/compass2.png`,
+  `${ROOT}/izu-map.png`,
+  `${ROOT}/images/logo-reverse-bingo.png`,
+  `${ROOT}/images/map.png`,
+  `${ROOT}/images/quest-log.png`,
+  `${ROOT}/images/reverse-bingo-logo.png`,
+  `${ROOT}/images/rule.png`,
+  `${ROOT}/images/schedule-logo.png`,
+  `${ROOT}/images/roulette-map-title.png`,
+  `${ROOT}/images/roulette.png`,
+  `${ROOT}/images/reset.png`,
 
-  "./icons/izu-icon-192.png",
-  "./icons/izu-icon-512.png"
+  `${ROOT}/icons/izu-icon-192.png`,
+  `${ROOT}/icons/izu-icon-512.png`
 ];
 
 // ★ インストール：キャッシュして即 skipWaiting
@@ -75,14 +77,10 @@ self.addEventListener("fetch", event => {
   event.respondWith(
     fetch(event.request)
       .then(fetchRes => {
-        // 新しいファイルをキャッシュに保存
         const clone = fetchRes.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         return fetchRes;
       })
-      .catch(() => {
-        // オフライン時はキャッシュから取得
-        return caches.match(event.request);
-      })
+      .catch(() => caches.match(event.request))
   );
 });
