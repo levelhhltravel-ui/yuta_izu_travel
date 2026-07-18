@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000000;
+    font-family: "Times New Roman", serif;
+    color: #f5e9c8;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 背景コンパス */
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.compass-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    opacity: 0.20;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.35));
+}
+
+/* コンテナ */
+.container {
+    height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ロゴ */
+.title-logo {
+    width: 80%;
+    max-width: 500px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 12px rgba(255, 230, 150, 0.8));
+}
+
+/* メニュー */
+.menu {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    width: 85%;
+    padding-bottom: 20px;
+    align-content: start;
+    min-height: 60vh;
+}
+
+/* 黄金石板ボタン */
+.menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 60px;
+    padding: 0;
+
+    font-size: 20px;
+    color: #f5e9c8;
+    text-decoration: none;
+
+    background: linear-gradient(180deg, #5a4a1f, #3b2f12);
+    border: 2px solid #d4b46a;
+    border-radius: 10px;
+
+    box-shadow:
+        inset 0 0 10px rgba(255, 215, 100, 0.3),
+        0 0 15px rgba(255, 215, 100, 0.4);
+
+    text-shadow: 0 0 8px rgba(255, 230, 150, 0.8);
+    transition: 0.2s;
+}
+
+.menu-btn:hover {
+    background: linear-gradient(180deg, #6a5825, #4a3b15);
+    box-shadow:
+        inset 0 0 15px rgba(255, 230, 150, 0.5),
+        0 0 20px rgba(255, 230, 150, 0.7);
+    transform: scale(1.05);
+}
+
+/* BGMボタン（menu-btnと統一） */
+.bgm-btn {
+    cursor: pointer;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逆ビンゴ</title>
+    <link rel="stylesheet" href="reverse-bingo.css">
+</head>
+
+<body>
+
+<h1 class="title">
+    <img src="images/reverse-bingo-logo.png" alt="Reverse Bingo Logo" class="logo">
+</h1>
+
+<div class="bingo-container" id="bingo"></div>
+
+<div class="info">
+    <div class="count">ビンゴ数：<span id="bingoCount">0</span></div>
+    <div class="count">リーチ数：<span id="reachCount">0</span></div>
+
+    <button id="resetBtn" class="reset-btn">
+        <img src="images/reset.png" alt="Reset" class="reset-img">
+    </button>
+</div>
+
+<!-- BINGOポップアップ -->
+<div id="bingoPopup" class="bingo-popup">BINGO!!</div>
+
+<script src="reverse-bingo.js"></script>
+<script src="audio.js"></script>
+
+</body>
+</html>

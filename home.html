@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逆ビンゴの旅</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="izu-icon-180" sizes="180x180" href="icons/izu-icon-180.png">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+<div class="background">
+    <img src="compass2.png" class="compass-bg" alt="compass">
+</div>
+
+<div class="container">
+
+    <img src="images/logo-reverse-bingo.png" alt="逆ビンゴの旅" class="title-logo">
+
+    <div class="menu">
+        <a href="reverse-bingo.html" class="menu-btn">ビンゴシート</a>
+        <a href="roulette.html" class="menu-btn">ルーレット</a>
+        <a href="missions.html" class="menu-btn">ミッションリスト</a>
+        <a href="schedule.html" class="menu-btn">スケジュール</a>
+        <a href="map.html" class="menu-btn">マップ</a>
+        <a href="rules.html" class="menu-btn">血の掟</a>
+        <!-- ★ マップの下に移動したBGMボタン -->
+        <button id="bgmToggle" class="menu-btn bgm-btn">BGM：ON</button>
+
+        
+    </div>
+
+</div>
+
+<!-- ★ ホームBGM -->
+<audio id="bgm" src="sounds/home-theme.mp3" loop></audio>
+
+<!-- ★ タップ効果音 -->
+<audio id="tapSound" src="sounds/tap.mp3"></audio>
+
+<script src="home.js"></script>
+</body>
+</html>
+

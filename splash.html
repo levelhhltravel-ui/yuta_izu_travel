@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IZU Adventure Begins</title>
+    <link rel="stylesheet" href="splash.css">
+</head>
+<body>
+
+<div class="splash-container">
+
+    <!-- 背後の夜光コンパス -->
+    <img src="compass.png" class="compass-bg" alt="compass">
+
+    <!-- 中央の伊豆マップ -->
+    <img src="izu-map.png" class="izu-map" alt="izu map">
+
+    <!-- タイトル -->
+    </div>
+
+    <!-- サブテキスト -->
+    <div class="subtitle">
+        A Journey Begins
+    </div>
+
+    <!-- 粒子エフェクトは削除（canvasも不要） -->
+    <!-- <canvas id="particles"></canvas> -->
+
+</div>
+
+<!-- スプラッシュ演出 -->
+<script src="splash.js"></script>
+
+<script>
+    // ▼ オープニングスキップ（連打対策付き）
+    let skipped = false;
+
+    function skipOpening() {
+        if (skipped) return;
+        skipped = true;
+        window.location.href = "home.html";
+    }
+
+    document.addEventListener("click", skipOpening);
+    document.addEventListener("touchstart", skipOpening);
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ルーレット</title>
+    <link rel="stylesheet" href="roulette.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="title-logo">
+        <img src="images/roulette.png" alt="Roulette Logo">
+    </div>
+
+    <div class="grid"></div>
+
+    <div class="buttons">
+        <button id="spinBtn" class="btn">抽選開始</button>
+    </div>
+
+    <div class="result-box">
+        <h2>結果</h2>
+        <div id="result" class="result">?</div>
+    </div>
+
+    <div class="buttons">
+        <button id="resetBtn" class="reset-btn">
+            <img src="images/reset.png" alt="Reset" class="reset-img">
+        </button>
+    </div>
+
+    <div class="used-container">
+        <h2>使用済みの数字</h2>
+        <div id="usedList" class="used-list"></div>
+    </div>
+
+    <div class="disable-setting">
+        <h3>使えない数字を設定</h3>
+        <input id="disable-input" type="text" placeholder="例：5, 8, 12">
+        <button class="disable-btn" onclick="setDisabledNumbers()">設定する</button>
+    </div>
+
+</div>
+
+<!-- ★ 抽選確定ポップアップ -->
+<div id="roulettePopup" class="roulette-popup">?</div>
+
+<script src="roulette.js"></script>
+<script src="audio.js"></script>
+
+</body>
+</html>

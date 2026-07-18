@@ -1,0 +1,227 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(180deg, #000000, #1a1a1a, #2b1f0f);
+    font-family: "Times New Roman", serif;
+    color: #f5e9c8;
+    text-align: center;
+}
+
+/* ロゴ */
+.title-logo {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.title-logo img {
+    width: 80%;
+    max-width: 500px;
+    filter: drop-shadow(0 0 12px rgba(255, 230, 150, 0.8));
+}
+
+/* 石板グリッド */
+.grid {
+    width: 90%;
+    max-width: 500px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+.stone {
+    padding: 18px 0;
+    background: linear-gradient(180deg, #5a4a1f, #3b2f12);
+    border: 2px solid #d4b46a;
+    border-radius: 10px;
+    font-size: 20px;
+    color: #f5e9c8;
+    text-shadow: 0 0 8px rgba(255, 230, 150, 0.8);
+    box-shadow:
+        inset 0 0 10px rgba(255, 215, 100, 0.3),
+        0 0 15px rgba(255, 215, 100, 0.4);
+    transition: 0.15s;
+}
+
+.stone.active {
+    background: linear-gradient(180deg, #d4b46a, #a88c4a);
+    color: #fff8d0;
+    box-shadow:
+        inset 0 0 15px rgba(255, 255, 200, 0.6),
+        0 0 20px rgba(255, 255, 200, 0.9);
+    transform: scale(1.1);
+}
+
+/* ブラックアウト石板 */
+.stone.disabled {
+    background: #1a1a1a;
+    color: #555;
+    border-color: #333;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+    text-shadow: none;
+    transform: none !important;
+}
+
+/* ボタン */
+.btn {
+    width: 60%;
+    padding: 15px;
+    margin: 10px auto;
+    font-size: 20px;
+    color: #f5e9c8;
+    background: linear-gradient(180deg, #5a4a1f, #3b2f12);
+    border: 2px solid #d4b46a;
+    border-radius: 10px;
+    box-shadow:
+        inset 0 0 10px rgba(255, 215, 100, 0.3),
+        0 0 15px rgba(255, 215, 100, 0.4);
+}
+
+.btn:hover {
+    background: linear-gradient(180deg, #6a5825, #4a3b15);
+    transform: scale(1.05);
+}
+
+/* リセットボタン */
+.reset-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    transition: transform 0.2s ease;
+    position: relative;
+    outline: none;
+}
+
+.reset-img {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 0 12px rgba(255, 60, 60, 0.8));
+}
+
+/* 魔力爆発アニメーション */
+@keyframes magicBurst {
+    0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0)); }
+    50% { transform: scale(1.3); filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0)); }
+}
+
+.reset-btn.burst {
+    animation: magicBurst 0.6s ease-out;
+}
+
+/* 結果表示 */
+.result-box {
+    margin-top: 20px;
+}
+
+.result {
+    font-size: 48px;
+    margin-top: 10px;
+    color: #fff8d0;
+    text-shadow: 0 0 15px rgba(255, 255, 200, 0.9);
+}
+
+/* 使用済み一覧 */
+.used-container {
+    margin-top: 30px;
+}
+
+.used-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.used-number {
+    padding: 8px 12px;
+    background: #3b2f12;
+    border: 1px solid #d4b46a;
+    border-radius: 6px;
+    color: #f5e9c8;
+    cursor: pointer;
+}
+
+.used-number:hover {
+    background: #5a4a1f;
+}
+
+/* 使えない数字設定 */
+.disable-setting {
+    width: 80%;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    background: rgba(40, 32, 20, 0.6);
+    padding: 15px;
+    border: 2px solid #d4b46a;
+    border-radius: 10px;
+}
+
+.disable-setting h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #f5e9c8;
+}
+
+#disable-input {
+    width: 80%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: 2px solid #d4b46a;
+    background: #3b2f12;
+    color: #f5e9c8;
+    text-align: center;
+}
+
+.disable-btn {
+    margin-top: 12px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #f5e9c8;
+    background: linear-gradient(180deg, #5a4a1f, #3b2f12);
+    border: 2px solid #d4b46a;
+    border-radius: 8px;
+}
+
+/* ★ 抽選確定ポップアップ */
+.roulette-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.2);
+    padding: 40px 60px;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffe8a8;
+    text-shadow: 0 0 25px rgba(255, 230, 150, 1);
+    background: rgba(20, 15, 10, 0.85);
+    border: 3px solid #d4b46a;
+    border-radius: 12px;
+    box-shadow:
+        0 0 40px rgba(255, 230, 150, 0.9),
+        0 0 80px rgba(255, 200, 100, 0.7);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.roulette-popup.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+    animation: rouletteBurst 0.6s ease-out;
+}
+
+@keyframes rouletteBurst {
+    0% { transform: translate(-50%, -50%) scale(0.2); }
+    50% { transform: translate(-50%, -50%) scale(1.3); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}

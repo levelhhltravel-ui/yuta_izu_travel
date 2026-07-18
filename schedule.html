@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅のしおり</title>
+    <link rel="stylesheet" href="schedule.css">
+</head>
+
+<body>
+
+<div class="background">
+    <img src="compass.png" class="compass-bg" alt="compass">
+</div>
+
+<!-- ロゴ画像 -->
+<div class="title-logo">
+    <img src="images/schedule-logo.png" alt="Schedule Logo">
+</div>
+
+<!-- タブ -->
+<div class="tabs">
+    <button class="tab-btn active" data-day="day1">1日目</button>
+    <button class="tab-btn" data-day="day2">2日目</button>
+    <button class="tab-btn" data-day="day3">3日目</button>
+</div>
+
+<!-- DAY1 -->
+<div id="day1" class="schedule-container">
+    <div class="schedule-item">
+        <h3>三島駅（集合）</h3>
+        <p>到着：13:00<br>レンタカー・チュートリアル：14:00</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>伊豆・三津シーパラダイス</h3>
+        <p>到着：14:30<br>出発：16:30<br>Mission：タカアシガニをさわる</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>大瀬埼</h3>
+        <p>到着：17:00<br>出発：18:00<br>Mission：富士山を見る</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>戸田に宿泊</h3>
+        <p>到着：18:30<br>
+        宿：［沼津］一軒家（105m²）｜BBQ・ガーデン・大型TV・最大5名<br>
+        Mission：蟹を食べる</p>
+    </div>
+</div>
+
+<!-- DAY2 -->
+<div id="day2" class="schedule-container" style="display:none;">
+    <div class="schedule-item">
+        <h3>出発</h3>
+        <p>9:30</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>天窓洞クルーズ</h3>
+        <p>到着：11:00<br>出発：12:30<br>Mission：クルーズに乗る</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>昼食</h3>
+        <p>昼食時間：40分</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>石廊崎オーシャンパーク（寄るだけ）</h3>
+        <p>到着：14:30<br>Mission：太平洋と記念撮影</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>河津七滝</h3>
+        <p>到着：15:30<br>出発：16:30<br>Mission：ワサビソフトを食べる</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>熱川に宿泊（北川温泉ホテル）</h3>
+        <p>到着：17:30<br>Mission：伊勢海老を食べる</p>
+    </div>
+</div>
+
+<!-- DAY3 -->
+<div id="day3" class="schedule-container" style="display:none;">
+    <div class="schedule-item">
+        <h3>出発</h3>
+        <p>9:30</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>城ケ崎海岸</h3>
+        <p>到着：10:00<br>出発：11:00<br>Mission：吊り橋を渡る</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>昼食</h3>
+        <p>（自由）</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>熱海城</h3>
+        <p>到着：12:30<br>出発：13:30<br>Mission：天守閣に登る</p>
+    </div>
+
+    <div class="schedule-item">
+        <h3>三島駅（解散）</h3>
+        <p>到着：14:30<br>解散</p>
+    </div>
+</div>
+
+<script src="schedule.js"></script>
+<script src="audio.js"></script>
+
+</body>
+</html>
+

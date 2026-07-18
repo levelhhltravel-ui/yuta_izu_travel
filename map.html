@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冒険マップ</title>
+    <link rel="stylesheet" href="map.css">
+</head>
+
+<body>
+
+<div class="map-container">
+
+    <!-- マップロゴ -->
+    <div class="map-logo">
+        <img src="images/roulette-map-title.png" class="map-logo-img">
+    </div>
+
+    <!-- 左側の番号 -->
+    <div class="map-numbers left">
+        <button data-id="1">①</button>
+        <button data-id="2">②</button>
+        <button data-id="3">③</button>
+        <button data-id="4">④</button>
+        <button data-id="5">⑤</button>
+    </div>
+
+    <!-- 右側の番号 -->
+    <div class="map-numbers right">
+        <button data-id="6">⑥</button>
+        <button data-id="7">⑦</button>
+        <button data-id="8">⑧</button>
+        <button data-id="9">⑨</button>
+        <button data-id="10">⑩</button>
+    </div>
+
+    <!-- マップ画像 -->
+    <div class="map-wrapper">
+        <img src="images/map.png" class="map-img">
+    </div>
+
+    <!-- ポップアップ（閉じるボタンなし） -->
+    <div id="detailWindow" class="detail-window hidden">
+        <div class="detail-inner">
+            <h2 id="detailTitle"></h2>
+            <p id="detailText"></p>
+        </div>
+    </div>
+
+</div>
+
+<script src="map.js"></script>
+<script src="audio.js"></script>
+</body>
+</html>
