@@ -1,4 +1,4 @@
-const CACHE_NAME = "izu-adventure-v4";
+const CACHE_NAME = "izu-adventure-v5";
 const URLS_TO_CACHE = [
   "./index.html",
   "./splash.html",
@@ -50,8 +50,7 @@ const URLS_TO_CACHE = [
   "./icons/izu-icon-512.png"
 ];
 
-
-// インストール
+// ★ インストール：キャッシュして即 skipWaiting
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(URLS_TO_CACHE))
@@ -59,36 +58,31 @@ self.addEventListener("install", event => {
   self.skipWaiting();
 });
 
-// 有効化（古いキャッシュ削除）
+// ★ 有効化：古いキャッシュ削除＋即 clients.claim()
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
+        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
       )
     )
   );
   self.clients.claim();
 });
 
-// fetch（キャッシュ優先＋更新反映）
+// ★ fetch：ネット優先（最強）
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return (
-        response ||
-        fetch(event.request).then(fetchRes => {
-          return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, fetchRes.clone());
-            return fetchRes;
-          });
-        })
-      );
-    })
+    fetch(event.request)
+      .then(fetchRes => {
+        // 新しいファイルをキャッシュに保存
+        const clone = fetchRes.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        return fetchRes;
+      })
+      .catch(() => {
+        // オフライン時はキャッシュから取得
+        return caches.match(event.request);
+      })
   );
 });
-
