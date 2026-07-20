@@ -4,7 +4,6 @@ let disabledNumbers = JSON.parse(localStorage.getItem("disabledNumbers")) || [];
 
 const grid = document.querySelector(".grid");
 const resultText = document.getElementById("result");
-const usedList = document.getElementById("usedList");
 const spinBtn = document.getElementById("spinBtn");
 const resetBtn = document.getElementById("resetBtn");
 const roulettePopup = document.getElementById("roulettePopup");
@@ -18,7 +17,17 @@ spinSound.volume = 0.5;
 const fanfareSound = new Audio("sounds/fanfare.mp3");
 fanfareSound.volume = 0.8;
 
-// 石板生成
+// ★ 火花生成
+function createSpark(x, y) {
+    const spark = document.createElement("div");
+    spark.classList.add("spark-effect");
+    spark.style.left = `${x - 7}px`;
+    spark.style.top = `${y - 7}px`;
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 600);
+}
+
+// ★ 石板生成
 for (let i = 1; i <= totalNumbers; i++) {
     const div = document.createElement("div");
     div.className = "stone";
@@ -26,6 +35,26 @@ for (let i = 1; i <= totalNumbers; i++) {
     div.textContent = i;
     grid.appendChild(div);
 }
+
+// ★ 石板タップで封印／解除
+grid.addEventListener("click", (e) => {
+    if (!e.target.classList.contains("stone")) return;
+
+    createSpark(e.clientX, e.clientY);
+
+    const num = parseInt(e.target.textContent);
+
+    if (usedNumbers.includes(num)) return;
+
+    if (disabledNumbers.includes(num)) {
+        disabledNumbers = disabledNumbers.filter(n => n !== num);
+    } else {
+        disabledNumbers.push(num);
+    }
+
+    localStorage.setItem("disabledNumbers", JSON.stringify(disabledNumbers));
+    updateStoneStates();
+});
 
 // ★ 使用済み・封印の状態更新
 function updateStoneStates() {
@@ -40,41 +69,6 @@ function updateStoneStates() {
     }
 }
 
-// ★ 使用済み一覧更新
-function updateUsedList() {
-    usedList.innerHTML = "";
-    usedNumbers.forEach(num => {
-        const div = document.createElement("div");
-        div.className = "used-number";
-        div.textContent = num;
-
-        div.onclick = () => {
-            usedNumbers = usedNumbers.filter(n => n !== num);
-            localStorage.setItem("usedNumbers", JSON.stringify(usedNumbers));
-            updateUsedList();
-        };
-
-        usedList.appendChild(div);
-    });
-
-    updateStoneStates();
-}
-
-// ★ 使えない数字設定
-function setDisabledNumbers() {
-    const text = document.getElementById("disable-input").value;
-
-    disabledNumbers = text
-        .split(",")
-        .map(n => parseInt(n.trim()))
-        .filter(n => !isNaN(n) && n >= 1 && n <= totalNumbers);
-
-    localStorage.setItem("disabledNumbers", JSON.stringify(disabledNumbers));
-
-    alert("使えない数字：" + disabledNumbers.join(", "));
-    updateStoneStates();
-}
-
 // ★ 抽選可能な数字
 function getAvailableNumbers() {
     const available = [];
@@ -87,7 +81,9 @@ function getAvailableNumbers() {
 }
 
 // ★ 抽選開始
-spinBtn.onclick = () => {
+spinBtn.onclick = (e) => {
+    createSpark(e.clientX, e.clientY);
+
     const available = getAvailableNumbers();
     if (available.length === 0) {
         alert("選べる数字がありません！");
@@ -97,7 +93,6 @@ spinBtn.onclick = () => {
     let interval;
     let current = null;
 
-    // ★ 回転音スタート
     spinSound.currentTime = 0;
     spinSound.play().catch(() => {});
 
@@ -112,15 +107,12 @@ spinBtn.onclick = () => {
         document.getElementById("stone-" + current).classList.add("active");
     }, 100);
 
-    // ★ 3秒後に停止
     setTimeout(() => {
         clearInterval(interval);
 
-        // ★ 回転音ストップ
         spinSound.pause();
         spinSound.currentTime = 0;
 
-        // ★ ファンファーレ再生
         fanfareSound.currentTime = 0;
         fanfareSound.play().catch(() => {});
 
@@ -128,7 +120,7 @@ spinBtn.onclick = () => {
         usedNumbers.push(current);
         localStorage.setItem("usedNumbers", JSON.stringify(usedNumbers));
 
-        updateUsedList();
+        updateStoneStates();
 
         roulettePopup.textContent = current;
         roulettePopup.classList.add("show");
@@ -137,12 +129,15 @@ spinBtn.onclick = () => {
 };
 
 // ★ ポップアップをタップで消す
-roulettePopup.addEventListener("click", () => {
+roulettePopup.addEventListener("click", (e) => {
+    createSpark(e.clientX, e.clientY);
     roulettePopup.classList.remove("show");
 });
 
 // ★ リセット
-resetBtn.onclick = () => {
+resetBtn.onclick = (e) => {
+    createSpark(e.clientX, e.clientY);
+
     resetBtn.classList.add("burst");
 
     localStorage.removeItem("usedNumbers");
@@ -151,18 +146,15 @@ resetBtn.onclick = () => {
     usedNumbers = [];
     disabledNumbers = [];
 
-    document.getElementById("disable-input").value = "";
     resultText.textContent = "?";
 
     setTimeout(() => {
         resetBtn.classList.remove("burst");
-        updateUsedList();
         updateStoneStates();
         document.querySelectorAll(".stone").forEach(s => s.classList.remove("active"));
     }, 600);
 };
 
 // ★ 初期描画
-updateUsedList();
 updateStoneStates();
 

@@ -1,3 +1,62 @@
+/* ▼ 背景コンパス */
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.compass-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    opacity: 0.08; /* 黒めに調整 */
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.35));
+    animation: slowRotate 60s linear infinite, glowPulse 8s ease-in-out infinite;
+}
+
+@keyframes slowRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes glowPulse {
+    0% { opacity: 0.08; }
+    50% { opacity: 0.12; }
+    100% { opacity: 0.08; }
+}
+
+/* ▼ スマホの青枠除去 */
+button:focus,
+button:active,
+.reset-btn:focus,
+.reset-btn:active,
+.reset-img:focus,
+.reset-img:active,
+img:focus,
+img:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* ▼ Androidのタップハイライト除去 */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ▼ 黒背景（これが白ぼけの本当の原因だった） */
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(180deg, #000000, #0d0d0d, #1a140a);
+    font-family: "Times New Roman", serif;
+    color: #f5e9c8;
+    text-align: center;
+}
+
 /* --- カード全体の強化 --- */
 .mission-card {
     padding: 18px;
@@ -14,6 +73,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    cursor: pointer;
 }
 
 /* アイコン部分 */
@@ -31,35 +91,25 @@
         inset 0 0 25px rgba(255, 255, 200, 0.7),
         0 0 25px rgba(255, 230, 150, 0.9);
     transform: scale(1.03);
+    animation: glow 1.2s ease-in-out;
 }
 
-/* 達成時のアニメーション */
 @keyframes glow {
     0% { box-shadow: 0 0 5px #fff; }
     50% { box-shadow: 0 0 20px #ffeaa7; }
     100% { box-shadow: 0 0 5px #fff; }
 }
 
-.mission-card.done {
-    animation: glow 1.2s ease-in-out;
+/* タイトルロゴ */
+.quest-logo {
+    width: 85%;
+    max-width: 420px;
+    margin: 10px auto 20px;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(255, 230, 150, 0.6));
 }
 
-/* タイトル */
-.quest-title {
-    text-align: center;
-    margin: 20px 0 10px;
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: #d4af37;
-    text-shadow:
-        0 0 6px rgba(255,255,255,0.9),
-        0 0 14px rgba(135,206,250,0.7),
-        0 2px 4px rgba(0,0,0,0.4);
-    font-family: "Cinzel", "Georgia", serif;
-}
-
-/* リセットボタン（完全修正版） */
+/* リセットボタン */
 .reset-btn {
     background: none;
     border: none;
@@ -72,66 +122,21 @@
     outline: none;
 }
 
-/* hover時：枠なし・巨大化なし */
 .reset-btn:hover {
     transform: translateY(-2px);
-    box-shadow: none;
-    outline: none;
 }
 
-/* active時：枠なし・影なし */
-.reset-btn:active {
-    transform: translateY(0);
-    box-shadow: none;
-    outline: none;
-}
-
-/* 画像 */
 .reset-img {
     width: 150px;
     height: auto;
     filter: drop-shadow(0 0 12px rgba(255, 60, 60, 0.8));
-    outline: none;
-}
-
-/* 画像のhover/focus枠も完全に消す */
-.reset-img:hover,
-.reset-img:focus,
-.reset-img:active {
-    outline: none;
-    box-shadow: none;
-}
-
-/* 背景 */
-body {
-    background: linear-gradient(180deg, #000000, #1a1a1a, #2b1f0f);
-    color: #f5e9c8;
-    font-family: "Times New Roman", serif;
-}
-
-/* ロゴ */
-.quest-logo {
-    width: 85%;
-    max-width: 420px;
-    margin: 10px auto 20px;
-    display: block;
-    filter: drop-shadow(0 0 12px rgba(255, 230, 150, 0.6));
 }
 
 /* 魔力爆発アニメーション */
 @keyframes magicBurst {
-    0% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0));
-    }
-    50% {
-        transform: scale(1.3);
-        filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1));
-    }
-    100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0));
-    }
+    0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0)); }
+    50% { transform: scale(1.3); filter: drop-shadow(0 0 25px rgba(255, 0, 0, 1)); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0)); }
 }
 
 .reset-btn.burst {
@@ -155,12 +160,25 @@ body {
 }
 
 @keyframes rippleBurst {
-    0% {
-        opacity: 1;
-        transform: scale(0.5);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(2.5);
-    }
+    0% { opacity: 1; transform: scale(0.5); }
+    100% { opacity: 0; transform: scale(2.5); }
+}
+
+/* ▼ タップ位置の火花（新規） */
+.spark-effect {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255, 230, 150, 1) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.2);
+    animation: sparkPop 0.6s ease-out forwards;
+    z-index: 9999;
+}
+
+@keyframes sparkPop {
+    0% { opacity: 1; transform: scale(0.2); }
+    80% { opacity: 0.8; transform: scale(2.2); }
+    100% { opacity: 0; transform: scale(3); }
 }

@@ -16,30 +16,31 @@
         <img src="images/roulette-map-title.png" class="map-logo-img">
     </div>
 
-    <!-- 左側の番号 -->
-    <div class="map-numbers left">
-        <button data-id="1">①</button>
-        <button data-id="2">②</button>
-        <button data-id="3">③</button>
-        <button data-id="4">④</button>
-        <button data-id="5">⑤</button>
-    </div>
-
-    <!-- 右側の番号 -->
-    <div class="map-numbers right">
-        <button data-id="6">⑥</button>
-        <button data-id="7">⑦</button>
-        <button data-id="8">⑧</button>
-        <button data-id="9">⑨</button>
-        <button data-id="10">⑩</button>
-    </div>
-
-    <!-- マップ画像 -->
+    <!-- マップ画像＋数字 -->
     <div class="map-wrapper">
+
+        <!-- 上段（①〜⑤） -->
+        <div class="map-number-row top">
+            <button data-id="1">①</button>
+            <button data-id="2">②</button>
+            <button data-id="3">③</button>
+            <button data-id="4">④</button>
+            <button data-id="5">⑤</button>
+        </div>
+
+        <!-- 下段（⑥〜⑩） -->
+        <div class="map-number-row bottom">
+            <button data-id="6">⑥</button>
+            <button data-id="7">⑦</button>
+            <button data-id="8">⑧</button>
+            <button data-id="9">⑨</button>
+            <button data-id="10">⑩</button>
+        </div>
+
         <img src="images/map.png" class="map-img">
     </div>
 
-    <!-- ポップアップ（閉じるボタンなし） -->
+    <!-- ポップアップ -->
     <div id="detailWindow" class="detail-window hidden">
         <div class="detail-inner">
             <h2 id="detailTitle"></h2>
@@ -53,3 +54,4 @@
 <script src="audio.js"></script>
 </body>
 </html>
+

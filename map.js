@@ -13,7 +13,7 @@ const spots = {
 };
 
 // DOM取得
-const buttons = document.querySelectorAll(".map-numbers button");
+const buttons = document.querySelectorAll(".map-number-row button");
 const detailWindow = document.getElementById("detailWindow");
 const detailTitle = document.getElementById("detailTitle");
 const detailText = document.getElementById("detailText");
@@ -35,4 +35,3 @@ detailWindow.addEventListener("click", (e) => {
         detailWindow.classList.add("hidden");
     }
 });
-

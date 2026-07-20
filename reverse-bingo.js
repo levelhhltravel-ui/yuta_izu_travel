@@ -14,6 +14,17 @@ let previousBingoCount = 0;
 const bingoFanfare = new Audio("sounds/bingo-fanfare.mp3");
 bingoFanfare.volume = 0.8;
 
+// ★ 火花生成
+function createSpark(x, y) {
+    const spark = document.createElement("div");
+    spark.classList.add("spark-effect");
+    spark.style.left = `${x - 7}px`;
+    spark.style.top = `${y - 7}px`;
+    document.body.appendChild(spark);
+
+    setTimeout(() => spark.remove(), 600);
+}
+
 // ビンゴライン一覧
 const lines = [
     [0,1,2,3,4], [5,6,7,8,9], [10,11,12,13,14],
@@ -49,7 +60,7 @@ function renderBoard() {
             cell.classList.add("open");
         }
 
-        cell.addEventListener("click", () => toggleCell(index, cell));
+        cell.addEventListener("click", (e) => toggleCell(index, cell, e));
 
         bingoContainer.appendChild(cell);
     });
@@ -58,7 +69,7 @@ function renderBoard() {
 }
 
 // セル開閉
-function toggleCell(i, cell) {
+function toggleCell(i, cell, event) {
     if (board[i] === "FREE") return;
 
     if (opened.includes(i)) {
@@ -68,8 +79,12 @@ function toggleCell(i, cell) {
         opened.push(i);
         cell.classList.add("open");
 
+        // ★ セル内部の金色粒子（既存）
         cell.classList.add("spark");
         setTimeout(() => cell.classList.remove("spark"), 600);
+
+        // ★ タップ位置に火花（新規）
+        createSpark(event.clientX, event.clientY);
     }
 
     localStorage.setItem("openedCells", JSON.stringify(opened));
@@ -93,13 +108,13 @@ function updateCounts() {
             opened.includes(i) || board[i] === "FREE"
         ).length;
 
-        // ★ ビンゴ（5マス開いている）
+        // ★ ビンゴ
         if (openedCount === 5) {
             bingoCount++;
             line.forEach(i => cells[i].classList.add("bingo-glow"));
         }
 
-        // ★ リーチ（未開放1マスだけ点滅）
+        // ★ リーチ
         else if (openedCount === 4) {
             reachCount++;
             line.forEach(i => {
@@ -110,13 +125,10 @@ function updateCounts() {
         }
     });
 
-    // ★ 新しくビンゴが増えたときだけ演出を出す
+    // ★ 新しくビンゴが増えたときだけ演出
     if (bingoCount > previousBingoCount) {
-
-        // ★ ファンファーレ再生
         bingoFanfare.currentTime = 0;
         bingoFanfare.play().catch(() => {});
-
         bingoPopup.classList.add("show");
     }
 
@@ -149,5 +161,5 @@ resetBtn.addEventListener("click", () => {
 generateBoard();
 renderBoard();
 
-// ★ ページ再訪時に必ずポップアップを閉じる（重要）
+// ★ ページ再訪時に必ずポップアップを閉じる
 bingoPopup.classList.remove("show");

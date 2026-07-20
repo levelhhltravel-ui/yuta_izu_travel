@@ -13,14 +13,14 @@ body {
     overflow: hidden;
 }
 
-/* 背後のコンパス */
+/* 背後のコンパス（中心補正済み） */
 .compass-bg {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 140%;
     opacity: 0.18;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -48%); /* ★ 視覚中心補正 */
     filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
 }
 
@@ -48,7 +48,6 @@ body {
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
-
 /* コンパス回転フェードアウト */
 .compass-disappear {
     animation: spinFade 2.2s ease-in forwards;
@@ -57,15 +56,15 @@ body {
 @keyframes spinFade {
     0% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        transform: translate(-50%, -48%) scale(1) rotate(0deg);
     }
     60% {
         opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+        transform: translate(-50%, -48%) scale(1.2) rotate(180deg);
     }
     100% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(1.6) rotate(360deg);
+        transform: translate(-50%, -48%) scale(1.6) rotate(360deg);
     }
 }
 
@@ -76,6 +75,7 @@ body {
     overflow: hidden;
 }
 
+/* 中央の伊豆マップ */
 .izu-map {
     position: absolute;
     top: 50%;
@@ -84,5 +84,6 @@ body {
     width: 70%;
     max-width: 600px;
     z-index: 5;
-    pointer-events: none; /* ← タップスキップの邪魔をしない */
+    pointer-events: none;
 }
+

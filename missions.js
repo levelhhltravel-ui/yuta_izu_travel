@@ -29,6 +29,16 @@ let missionStatus = JSON.parse(localStorage.getItem("missionStatus")) || {};
 const missionList = document.getElementById("missionList");
 const resetBtn = document.getElementById("resetBtn");
 
+// ★ 火花生成
+function createSpark(x, y) {
+    const spark = document.createElement("div");
+    spark.classList.add("spark-effect");
+    spark.style.left = `${x - 7}px`;
+    spark.style.top = `${y - 7}px`;
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 600);
+}
+
 function renderMissions() {
     missionList.innerHTML = "";
 
@@ -53,20 +63,19 @@ function renderMissions() {
             <div class="mission-text">${text}</div>
         `;
 
-        card.onclick = () => {
+        card.onclick = (e) => {
+
+            createSpark(e.clientX, e.clientY);
 
             // ミッション13だけ特別仕様
             if (index === 12) {
 
-                // 5回達成済みなら → 次のタップでリセット
                 if ((missionStatus[13] || 0) >= 5) {
                     missionStatus[13] = 0;
                     doneList = doneList.filter(n => n !== index);
                 } else {
-                    // 通常カウントアップ
                     missionStatus[13] = (missionStatus[13] || 0) + 1;
 
-                    // 5回達成で done 扱い
                     if (missionStatus[13] >= 5) {
                         if (!doneList.includes(index)) {
                             doneList.push(index);
@@ -74,7 +83,6 @@ function renderMissions() {
                     }
                 }
 
-                // 保存
                 localStorage.setItem("missionStatus", JSON.stringify(missionStatus));
                 localStorage.setItem("doneMissions", JSON.stringify(doneList));
 
@@ -97,7 +105,9 @@ function renderMissions() {
     });
 }
 
-resetBtn.onclick = () => {
+resetBtn.onclick = (e) => {
+    createSpark(e.clientX, e.clientY);
+
     resetBtn.classList.add("burst");
 
     doneList = [];
@@ -107,10 +117,9 @@ resetBtn.onclick = () => {
 
     setTimeout(() => {
         resetBtn.classList.remove("burst");
-        renderMissions(); // ← これが重要
+        renderMissions();
     }, 600);
 };
 
 renderMissions();
-
 

@@ -24,6 +24,18 @@ body {
     opacity: 0.20;
     transform: translate(-50%, -50%);
     filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.35));
+    animation: slowRotate 60s linear infinite, glowPulse 8s ease-in-out infinite;
+}
+
+@keyframes slowRotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes glowPulse {
+    0%   { opacity: 0.18; }
+    50%  { opacity: 0.23; }
+    100% { opacity: 0.18; }
 }
 
 /* コンテナ */
@@ -94,4 +106,31 @@ body {
 /* BGMボタン（menu-btnと統一） */
 .bgm-btn {
     cursor: pointer;
+}
+
+/* ▼ タップ時の火花エフェクト */
+.spark {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255, 230, 150, 1) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.2);
+    animation: sparkBurst 0.6s ease-out forwards;
+}
+
+@keyframes sparkBurst {
+    0% {
+        opacity: 1;
+        transform: scale(0.2);
+    }
+    80% {
+        opacity: 0.8;
+        transform: scale(2.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
 }

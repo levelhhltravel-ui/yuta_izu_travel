@@ -39,16 +39,35 @@ function fadeInBGM() {
 
 window.addEventListener("load", fadeInBGM);
 
-// ★ メニューのボタンにタップ音
+// ▼ 火花生成関数
+function createSpark(x, y) {
+    const spark = document.createElement("div");
+    spark.classList.add("spark");
+    spark.style.left = `${x - 6}px`;
+    spark.style.top = `${y - 6}px`;
+    document.body.appendChild(spark);
+
+    setTimeout(() => {
+        spark.remove();
+    }, 600);
+}
+
+// ★ メニューのボタンにタップ音＋火花
 document.querySelectorAll(".menu-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
         tapSound.currentTime = 0;
         tapSound.play().catch(() => {});
+
+        // ★ 火花発生
+        createSpark(e.clientX, e.clientY);
     });
 });
 
 // ★ BGM ON/OFF ボタン制御（全ページ連動）
-bgmToggleBtn.addEventListener("click", () => {
+bgmToggleBtn.addEventListener("click", (e) => {
+    // 火花
+    createSpark(e.clientX, e.clientY);
+
     if (bgmEnabled === "true") {
         bgmEnabled = "false";
         localStorage.setItem("bgmEnabled", "false");
