@@ -60,12 +60,12 @@ body {
 
 /* 上段（①〜⑤） */
 .map-number-row.top {
-    top: 9%;
+    top: 7%;
 }
 
 /* 下段（⑥〜⑩） */
 .map-number-row.bottom {
-    top: 15%;
+    top: 19%;
 }
 
 /* 聖なる黒金フレームの数字ボタン */

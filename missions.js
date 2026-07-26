@@ -39,6 +39,10 @@ function createSpark(x, y) {
     setTimeout(() => spark.remove(), 600);
 }
 
+// ★ タップ音（カチッ）
+const clickSound = new Audio("sounds/click.mp3");
+clickSound.volume = 0.5;
+
 function renderMissions() {
     missionList.innerHTML = "";
 
@@ -65,7 +69,12 @@ function renderMissions() {
 
         card.onclick = (e) => {
 
+            // 火花
             createSpark(e.clientX, e.clientY);
+
+            // カチッ音
+            clickSound.currentTime = 0;
+            clickSound.play().catch(() => {});
 
             // ミッション13だけ特別仕様
             if (index === 12) {
@@ -122,4 +131,3 @@ resetBtn.onclick = (e) => {
 };
 
 renderMissions();
-
