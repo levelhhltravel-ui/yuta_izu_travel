@@ -7,6 +7,7 @@ const resultText = document.getElementById("result");
 const spinBtn = document.getElementById("spinBtn");
 const resetBtn = document.getElementById("resetBtn");
 const roulettePopup = document.getElementById("roulettePopup");
+const usedCount = document.getElementById("usedCount");
 
 // ★ 回転中の効果音
 const spinSound = new Audio("sounds/spin.mp3");
@@ -69,6 +70,11 @@ function updateStoneStates() {
     }
 }
 
+// ★ 抽選済みカウンター更新
+function updateUsedCount() {
+    usedCount.textContent = usedNumbers.length;
+}
+
 // ★ 抽選可能な数字
 function getAvailableNumbers() {
     const available = [];
@@ -121,6 +127,7 @@ spinBtn.onclick = (e) => {
         localStorage.setItem("usedNumbers", JSON.stringify(usedNumbers));
 
         updateStoneStates();
+        updateUsedCount();
 
         roulettePopup.textContent = current;
         roulettePopup.classList.add("show");
@@ -152,9 +159,11 @@ resetBtn.onclick = (e) => {
         resetBtn.classList.remove("burst");
         updateStoneStates();
         document.querySelectorAll(".stone").forEach(s => s.classList.remove("active"));
+        updateUsedCount();
     }, 600);
 };
 
 // ★ 初期描画
 updateStoneStates();
+updateUsedCount();
 

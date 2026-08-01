@@ -20,17 +20,27 @@
         <img src="images/roulette.png" alt="Roulette Logo">
     </div>
 
+    <!-- ▼ 石板グリッド -->
     <div class="grid"></div>
 
+    <!-- ▼ 抽選ボタン -->
     <div class="buttons">
         <button id="spinBtn" class="btn">抽選開始</button>
     </div>
 
+    <!-- ▼ 結果表示 -->
     <div class="result-box">
         <h2>結果</h2>
         <div id="result" class="result">?</div>
     </div>
 
+    <!-- ▼ 抽選済みカウンター（リセットボタンの上に移動） -->
+    <div class="counter-box">
+        <h3>カウンター</h3>
+        <div id="usedCount" class="used-count">0</div>
+    </div>
+
+    <!-- ▼ リセットボタン -->
     <div class="buttons">
         <button id="resetBtn" class="reset-btn">
             <img src="images/reset.png" alt="Reset" class="reset-img">
@@ -39,7 +49,7 @@
 
 </div>
 
-<!-- ★ 抽選確定ポップアップ -->
+<!-- ▼ 抽選確定ポップアップ -->
 <div id="roulettePopup" class="roulette-popup">?</div>
 
 <script src="roulette.js"></script>
@@ -47,4 +57,3 @@
 
 </body>
 </html>
-
