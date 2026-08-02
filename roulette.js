@@ -72,7 +72,7 @@ function updateStoneStates() {
 
 // ★ 抽選済みカウンター更新
 function updateUsedCount() {
-    usedCount.textContent = usedNumbers.length;
+    usedCount.textContent = usedNumbers.length + disabledNumbers.length;
 }
 
 // ★ 抽選可能な数字
