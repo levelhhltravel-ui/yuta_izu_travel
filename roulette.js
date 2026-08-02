@@ -55,6 +55,9 @@ grid.addEventListener("click", (e) => {
 
     localStorage.setItem("disabledNumbers", JSON.stringify(disabledNumbers));
     updateStoneStates();
+
+    // ★ 封印タップ時にもカウンター更新
+    updateUsedCount();
 });
 
 // ★ 使用済み・封印の状態更新
@@ -70,7 +73,7 @@ function updateStoneStates() {
     }
 }
 
-// ★ 抽選済みカウンター更新
+// ★ 抽選済み＋封印済みカウンター更新
 function updateUsedCount() {
     usedCount.textContent = usedNumbers.length + disabledNumbers.length;
 }
