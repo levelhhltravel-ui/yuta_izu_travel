@@ -18,6 +18,10 @@ spinSound.volume = 0.5;
 const fanfareSound = new Audio("sounds/fanfare.mp3");
 fanfareSound.volume = 0.8;
 
+// ★ タップ音（追加）
+const tapSound = new Audio("sounds/tap.mp3");
+tapSound.volume = 0.6;
+
 // ★ 火花生成
 function createSpark(x, y) {
     const spark = document.createElement("div");
@@ -42,6 +46,10 @@ grid.addEventListener("click", (e) => {
     if (!e.target.classList.contains("stone")) return;
 
     createSpark(e.clientX, e.clientY);
+
+    // ★ タップ音（追加）
+    tapSound.currentTime = 0;
+    tapSound.play().catch(() => {});
 
     const num = parseInt(e.target.textContent);
 
@@ -169,4 +177,3 @@ resetBtn.onclick = (e) => {
 // ★ 初期描画
 updateStoneStates();
 updateUsedCount();
-
