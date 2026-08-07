@@ -14,9 +14,13 @@ let previousBingoCount = 0;
 const bingoFanfare = new Audio("sounds/bingo-fanfare.mp3");
 bingoFanfare.volume = 0.8;
 
-// ★ セルタップ音（追加）
+// ★ セルタップ音（既存）
 const tapSound = new Audio("sounds/tap.mp3");
 tapSound.volume = 0.6;
+
+// ★ リセット専用タップ音（新規）
+const resetTapSound = new Audio("sounds/reset-tap.mp3");
+resetTapSound.volume = 0.6;
 
 // ★ 火花生成
 function createSpark(x, y) {
@@ -76,7 +80,7 @@ function renderBoard() {
 function toggleCell(i, cell, event) {
     if (board[i] === "FREE") return;
 
-    // ★ タップ音（追加）
+    // ★ セルタップ音（既存）
     tapSound.currentTime = 0;
     tapSound.play().catch(() => {});
 
@@ -153,6 +157,11 @@ bingoPopup.addEventListener("click", () => {
 
 // リセット
 resetBtn.addEventListener("click", () => {
+
+    // ★ リセット専用タップ音（新規）
+    resetTapSound.currentTime = 0;
+    resetTapSound.play().catch(() => {});
+
     resetBtn.classList.add("burst");
 
     opened = [];
@@ -171,4 +180,3 @@ renderBoard();
 
 // ★ ページ再訪時に必ずポップアップを閉じる
 bingoPopup.classList.remove("show");
-

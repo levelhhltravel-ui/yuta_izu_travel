@@ -18,9 +18,13 @@ spinSound.volume = 0.5;
 const fanfareSound = new Audio("sounds/fanfare.mp3");
 fanfareSound.volume = 0.8;
 
-// ★ タップ音（追加）
+// ★ 石板タップ音（ルーレット専用）
 const tapSound = new Audio("sounds/tap.mp3");
 tapSound.volume = 0.6;
+
+// ★ リセット専用タップ音（新規）
+const resetTapSound = new Audio("sounds/reset-tap.mp3");
+resetTapSound.volume = 0.6;
 
 // ★ 火花生成
 function createSpark(x, y) {
@@ -47,7 +51,7 @@ grid.addEventListener("click", (e) => {
 
     createSpark(e.clientX, e.clientY);
 
-    // ★ タップ音（追加）
+    // ★ 石板タップ音（ルーレット専用）
     tapSound.currentTime = 0;
     tapSound.play().catch(() => {});
 
@@ -155,6 +159,10 @@ roulettePopup.addEventListener("click", (e) => {
 // ★ リセット
 resetBtn.onclick = (e) => {
     createSpark(e.clientX, e.clientY);
+
+    // ★ リセット専用タップ音（新規）
+    resetTapSound.currentTime = 0;
+    resetTapSound.play().catch(() => {});
 
     resetBtn.classList.add("burst");
 
